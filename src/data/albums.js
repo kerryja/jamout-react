@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     title: "The Colors",
     artist: "Pablo Picasso",
     releaseInfo: "1909 Spanish Records",
@@ -22,6 +23,7 @@ export default [
     ]
   },
   {
+    id: 2,
     title: "The Telephone",
     artist: "Guglielmo Marconi",
     releaseInfo: "1909 EM",

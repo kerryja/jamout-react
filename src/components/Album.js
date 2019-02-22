@@ -5,8 +5,8 @@ class Album extends Component {
   constructor(props) {
     super(props);
 
-    const album = albumData.find(album => {
-      return album.slug === this.props.match.params.slug;
+    const album = albumData.find(a => {
+      return a.slug === this.props.match.params.slug;
     });
 
     this.state = {
@@ -36,7 +36,15 @@ class Album extends Component {
             <col id="song-title-column" />
             <col id="song-duration-column" />
           </colgroup>
-          <tbody />
+          <tbody>
+            {this.state.album.songs.map((song, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{song.title}</td>
+                <td>{song.duration}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </section>
     );

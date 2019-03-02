@@ -1,11 +1,24 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  min-height: 100vh;
+  font-family: BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /*background-image: url("gradient2.jpg");
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 100%;*/
+  background: rgba(208, 159, 162, 0.75);
+  background: linear-gradient(
+    135deg,
+    rgba(208, 159, 162, 0.75) 12%,
+    rgba(172, 166, 201, 0.81) 32%,
+    rgba(125, 155, 202, 0.86) 49%,
+    rgba(84, 116, 187, 0.96) 82%,
+    rgba(84, 116, 187, 1) 96%
+  );
 }
 
 code {

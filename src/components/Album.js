@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import albumData from "./../data/albums";
 import PlayerBar from "./PlayerBar";
+import { Columns } from "react-bulma-components/full";
+import { Card } from "react-bulma-components/full";
 
 class Album extends Component {
   constructor(props) {
@@ -143,54 +145,64 @@ class Album extends Component {
     return (
       <section className="album">
         <section id="album-info">
-          <img
-            id="album-cover-art"
-            src={this.state.album.albumCover}
-            alt={this.state.album.title}
-          />
-          <div className="album-details">
-            <h1 id="album-title">{this.state.album.title}</h1>
-            <h2 className="artist">{this.state.album.artist}</h2>
-            <div id="release-info">{this.state.album.releaseInfo}</div>
-          </div>
+          <Columns>
+            <Columns.Column size="one-third">
+              <Card backgroundColor="#ffffff10">
+                <Card.Image
+                  id="album-cover-art"
+                  src={this.state.album.albumCover}
+                  alt={this.state.album.title}
+                />
+                <Card.Content>
+                  <div className="album-details">
+                    <h1 id="album-title">{this.state.album.title}</h1>
+                    <h2 className="artist">{this.state.album.artist}</h2>
+                    <div id="release-info">{this.state.album.releaseInfo}</div>
+                  </div>
+                </Card.Content>
+              </Card>
+            </Columns.Column>
+            <Columns.Column narrow>
+              <table id="song-list" className="table is-hoverable">
+                <colgroup>
+                  <col id="song-number-column" />
+                  <col id="song-title-column" />
+                  <col id="song-duration-column" />
+                </colgroup>
+                <tbody>
+                  {this.state.album.songs.map((song, index) => {
+                    let icon;
+                    const isCurrentSong = this.state.currentSong === song;
+                    const isHoveredSong = this.state.hoveredSong === song;
+                    if (isCurrentSong && this.state.isPlaying) {
+                      icon = <span className="icon ion-md-pause" />;
+                    } else if (isHoveredSong) {
+                      icon = <span className="icon ion-md-play-circle" />;
+                    } else {
+                      icon = index + 1;
+                    }
+
+                    return (
+                      <tr
+                        className="song"
+                        key={index}
+                        onClick={() => this.handleSongClick(song)}
+                        onMouseEnter={() => this.mouseEnter(song)}
+                      >
+                        <td>
+                          <div>{icon}</div>
+                        </td>
+                        <td>{song.title}</td>
+                        <td>{this.formatTime(song.duration)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </Columns.Column>
+          </Columns>
         </section>
 
-        <table id="song-list">
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>
-          <tbody>
-            {this.state.album.songs.map((song, index) => {
-              let icon;
-              const isCurrentSong = this.state.currentSong === song;
-              const isHoveredSong = this.state.hoveredSong === song;
-              if (isCurrentSong && this.state.isPlaying) {
-                icon = <span className="icon ion-md-pause" />;
-              } else if (isHoveredSong) {
-                icon = <span className="icon ion-md-play-circle" />;
-              } else {
-                icon = index + 1;
-              }
-
-              return (
-                <tr
-                  className="song"
-                  key={index}
-                  onClick={() => this.handleSongClick(song)}
-                  onMouseEnter={() => this.mouseEnter(song)}
-                >
-                  <td>
-                    <div>{icon}</div>
-                  </td>
-                  <td>{song.title}</td>
-                  <td>{this.formatTime(song.duration)}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}

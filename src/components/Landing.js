@@ -8,7 +8,7 @@ const Landing = () => (
       <div className="point">
         <h2 className="point-title">Choose your music</h2>
         <p className="point-description">
-          The world is full of music; why shouls you have to listen to music
+          The world is full of music; why should you have to listen to music
           that someone else chose?
         </p>
       </div>
